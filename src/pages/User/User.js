@@ -24,6 +24,8 @@ export function User() {
         setData(database.data)
     }
 
+    SwiperCore.use([Navigation])
+
     useEffect(() => {
         requestDatabase()
     }, [data])
