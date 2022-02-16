@@ -17,7 +17,7 @@ export function Home() {
 
     const gitHubSignIn = () => {
         signInWithPopup(auth, gitHubProvider).then((res) => {
-            window.location.href = `/user/${res._tokenResponse.screenName}`
+            window.location.href = `/createcard/${res._tokenResponse.screenName}`
         }).catch((err) => {
             window.location.href = '/error'
             console.log(err);
@@ -25,27 +25,28 @@ export function Home() {
     };
 
     return (
-        <HomeContainer>
+        <>
             <Header></Header>
-            <HomeContentContainer>
-                <HomeContentContainer__Left>
-                    <h1>O maior banco de devs do Brasil</h1>
-                    <p>
-                        Não importa se front ou back end, fazer networking é
-                        muito importante. Faça parte da maior comunidade de
-                        desenvolvedores brasileiros.
-                    </p>
-                    
-                        <button onClick={gitHubSignIn}>Entre agora</button>
-                    
-                </HomeContentContainer__Left>
+            <HomeContainer>
+                <HomeContentContainer>
+                    <HomeContentContainer__Left>
+                        <h1>O maior banco de devs do Brasil</h1>
+                        <p>
+                            Não importa se front ou back end, fazer networking é
+                            muito importante. Faça parte da maior comunidade de
+                            desenvolvedores brasileiros.
+                        </p>
+                        
+                            <button onClick={gitHubSignIn}>Entre agora</button>
+                    </HomeContentContainer__Left>
 
-                <HomeContentContainer__Right>
-                    <img src={DeveloperImg} alt="Developer" />
-                </HomeContentContainer__Right>
+                    <HomeContentContainer__Right>
+                        <img src={DeveloperImg} alt="Developer" />
+                    </HomeContentContainer__Right>
 
-                <img src={BlobsImg} className="blobs" />
-            </HomeContentContainer>
-        </HomeContainer>
+                    <img src={BlobsImg} className="blobs" />
+                </HomeContentContainer>
+            </HomeContainer>
+        </>
     );
 }

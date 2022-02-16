@@ -1,13 +1,18 @@
 import styled, { css } from 'styled-components';
 
 export const StyledHeader = styled.header`
-    min-width:100vw;
+    width:100%;
     height:120px;
 
     display:flex;
     align-items:center;
     justify-content:space-around;
     flex-wrap:wrap;
+
+    a{
+        color:inherit;
+        text-decoration:none;
+    }
 `
 
 export const FlexRow = styled.div`

@@ -17,14 +17,14 @@ body{
     font-family: 'Maven Pro', sans-serif;
 }
 
-    /* Chrome, Edge, and Safari */
-    *::-webkit-scrollbar {
-    width: 5px;
-    }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+width: 5px;
+}
 
-    *::-webkit-scrollbar-track {
-    background: #1d1d1d;
-    }
-    *::-webkit-scrollbar-thumb {
-    background-color: #27AE60;
-    }
+*::-webkit-scrollbar-track {
+background: #1d1d1d;
+}
+*::-webkit-scrollbar-thumb {
+background-color: #27AE60;
+}

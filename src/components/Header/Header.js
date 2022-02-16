@@ -5,18 +5,24 @@ import facebook from '../../assets/icons/facebook.svg'
 import discord from '../../assets/icons/discord.svg'
 import logo from '../../assets/logo.svg'
 
+const linkedinLink = "https://www.linkedin.com/company/comunidadeballerini/"
+const facebookLink = "https://www.facebook.com/rafaella.balleriniribeirogomes"
+const discordLink = "https://discord.gg/ballerini"
+
 export function Header(){
     return (
         <StyledHeader>
             <FlexRow icons>
-                <a href="#"><img src={linkedin} alt="Linkedin" /></a>
-                <a href="#"><img src={facebook} alt="Facebook" /></a>
-                <a href="#"><img src={discord} alt="Discord" /></a>
+                <a href={linkedinLink} target="_blank"><img src={linkedin} alt="Linkedin" /></a>
+                <a href={facebookLink} target="_blank"><img src={facebook} alt="Facebook" /></a>
+                <a href={discordLink} target="_blank"><img src={discord} alt="Discord" /></a>
             </FlexRow>
-            <FlexRow logo>
-                <img src={logo} alt="Ballerini Devs" />
-                <h2>Ballerini Devs</h2>
-            </FlexRow>
+            <a href="/">
+                <FlexRow logo>
+                    <img src={logo} alt="Ballerini Devs" />
+                    <h2>Ballerini Devs</h2>
+                </FlexRow>
+            </a>
         </StyledHeader>
     )
 }
