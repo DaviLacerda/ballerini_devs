@@ -12,8 +12,8 @@ export function Routes(){
                 <RoutesInSite>
                     <Route path='*' element={<Home />}></Route>
                     <Route path='/error' element={<Error />}></Route>
-                    <Route path='/createcard/:githubname' element={<CreateCard />}></Route>
-                    <Route path='/user/:githubname' element={<User />}></Route>
+                    <Route path='/createcard' element={<CreateCard />}></Route>
+                    <Route path='/user' element={<User />}></Route>
                 </RoutesInSite>
             </Router>
         </>

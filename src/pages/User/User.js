@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
-import { createClient } from "@supabase/supabase-js";
 import { Header } from "../../components/Header/Header";
-import { UserContainer, CardsDisplay, Card, DevInput } from "./styles";
+import { UserContainer, CardsDisplay, Card, DevInput, LogOutButton } from "./styles";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import SearchIcon from '@mui/icons-material/Search';
+import { supabase } from "../../hooks/supabase";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
@@ -16,16 +17,17 @@ export function User() {
     const [data, setData] = useState([])
     const [search, setSearch] = useState('')
 
-    const supabaseURL = process.env.REACT_APP_URL
-    const supabaseApiKey = process.env.REACT_APP_API_KEY
-    const supabaseClient = createClient(supabaseURL, supabaseApiKey)
-
     const requestDatabase = async () => {
-        const database = await supabaseClient.from("user").select("*");
+        const database = await supabase.from("user").select("*");
         setData(database.data)
     }
 
     SwiperCore.use([Navigation])
+
+    const logOut = async () => {
+        const { error } = await supabase.auth.signOut()
+        window.location.href = '/'
+    }
 
     useEffect(() => {
         requestDatabase()
@@ -34,9 +36,13 @@ export function User() {
     return (
         <>
             <Header />
-            <DevInput type="text" placeholder="Search developer" onInput={(e) => setSearch(e.target.value)}></DevInput>
+            <DevInput>
+                <SearchIcon />
+                <input type="text" placeholder="Buscar Desenvolvedor" onInput={(e) => setSearch(e.target.value)}></input>
+            </DevInput>
             <UserContainer>
                 <CardsDisplay>
+                    <LogOutButton onClick={logOut}>LogOut</LogOutButton>
                     <Swiper
                         slidesPerView={1}
                         navigation
@@ -45,7 +51,7 @@ export function User() {
                             1200: {
                             slidesPerGroup: 1,
                             slidesPerView: 3,
-                            spaceBetween:200,
+                            spaceBetween:75,
                             },
                         }}
                     >
@@ -54,7 +60,7 @@ export function User() {
                             if(search === ""){
                                 return user
                             }
-                            else if(user.name.toLowerCase().includes(search)){
+                            else if(user.name.toLowerCase().includes(search.toLowerCase())){
                                 return user
                             }
                         }).map((user) => {

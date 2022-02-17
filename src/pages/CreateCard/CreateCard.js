@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { createClient } from "@supabase/supabase-js"
+import { supabase } from "../../hooks/supabase"
 import { CreateCardContainer } from "./styles"
 
 export function CreateCard(){   
@@ -7,11 +7,7 @@ export function CreateCard(){
     const [about, setAbout] = useState("")
     const [linkedin, setLinkedIn] = useState("")
 
-    const gitHubUser = window.location.href.split("/")[4];
-
-    const supabaseURL = process.env.REACT_APP_URL
-    const supabaseApiKey = process.env.REACT_APP_API_KEY
-    const supabaseClient = createClient(supabaseURL, supabaseApiKey)
+    const gitHubUser = supabase.auth.user().user_metadata.user_name;
 
     const handleNewUser = ({name, linkedin, about}) => {
         const newUser = {
@@ -22,21 +18,24 @@ export function CreateCard(){
             img: `https://github.com/${gitHubUser}.png`
         }
 
-        supabaseClient.from("user").insert([newUser]).then((data) => {
-            console.log(data);
-        })
+        supabase.from("user").insert([newUser])
         
-        window.location.href = `/user/${gitHubUser}`
+        window.location.href = `/user`
     }
+
+    useEffect(() => {
+        name !== "" && about !== "" && linkedin !== "" ? document.getElementById('createBtn').disabled = false : document.getElementById('createBtn').disabled = true
+    }, [name, about, linkedin])
+    
 
     return (
         <CreateCardContainer>  
             <img src={`https://github.com/${gitHubUser}.png`} alt={gitHubUser} className="img"/>
             <h2>{gitHubUser}</h2>
-            <input type="text" placeholder="Name" onInput={(e) => setName(e.target.value)}></input>
-            <input type="text" placeholder="About" onInput={(e) => setAbout(e.target.value)}></input>
-            <input type="text" placeholder="LinkedIn User" onInput={(e) => setLinkedIn(e.target.value)}></input>
-            <button onClick={() => handleNewUser({name, about, linkedin})}>Create Card</button>
+            <input type="text" placeholder="Nome" onInput={(e) => setName(e.target.value)}></input>
+            <input type="text" placeholder="Sobre você" onInput={(e) => setAbout(e.target.value)}></input>
+            <input type="text" placeholder="Usuário no LinkedIn" onInput={(e) => setLinkedIn(e.target.value)}></input>
+            <button id="createBtn" onClick={() => handleNewUser({name, about, linkedin})}>Create Card</button>
         </CreateCardContainer>
     )
 }

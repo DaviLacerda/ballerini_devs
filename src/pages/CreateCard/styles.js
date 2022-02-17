@@ -45,6 +45,15 @@ export const CreateCardContainer = styled.div`
             transform:scale(0.95);
         }
 
+        &:disabled{
+            background-color:#27AE6022;
+            color:#fff2;
+
+            &:after{
+                background-color:#27AE6022;
+            }
+        }
+
         &:after{
             position:absolute;
             bottom:-20px;

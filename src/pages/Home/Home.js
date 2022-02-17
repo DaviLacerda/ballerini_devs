@@ -7,46 +7,62 @@ import {
 } from "./styles";
 import DeveloperImg from "../../assets/developer_home.svg";
 import BlobsImg from "../../assets/blobs.svg";
-import { app } from "../../firebaseConfig";
-import { GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { Error } from "../Error/Error";
+import { supabase } from "../../hooks/supabase";
+import { useState, useEffect } from "react";
+import { CreateCard } from "../CreateCard/CreateCard";
 
 export function Home() {
-    const gitHubProvider = new GithubAuthProvider();
-    const auth = getAuth();
+    const [user, setUser] = useState(null)
 
-    const gitHubSignIn = () => {
-        signInWithPopup(auth, gitHubProvider).then((res) => {
-            window.location.href = `/createcard/${res._tokenResponse.screenName}`
-        }).catch((err) => {
-            window.location.href = '/error'
-            console.log(err);
+    async function signInWithGitHub() { 
+        const {user, session, error} = await supabase.auth.signIn({
+            provider: "github",
         })
-    };
+    }
+
+    const checkUser = async() => {
+        const user = await supabase.auth.user()
+        setUser(user)
+    }
+
+    useEffect(() => {
+      checkUser()
+      window.addEventListener('hashchange', () => {
+          checkUser()
+      })
+    }, [])
+    
 
     return (
         <>
-            <Header></Header>
-            <HomeContainer>
-                <HomeContentContainer>
-                    <HomeContentContainer__Left>
-                        <h1>O maior banco de devs do Brasil</h1>
-                        <p>
-                            Não importa se front ou back end, fazer networking é
-                            muito importante. Faça parte da maior comunidade de
-                            desenvolvedores brasileiros.
-                        </p>
-                        
-                            <button onClick={gitHubSignIn}>Entre agora</button>
-                    </HomeContentContainer__Left>
+            {
+            user ? <CreateCard /> : ( 
+                <>
+                    <Header></Header>
+                    <HomeContainer>
+                        <HomeContentContainer>
+                            <HomeContentContainer__Left>
+                                <h1>O maior banco de devs do Brasil</h1>
+                                <p>
+                                    Não importa se front ou back end, fazer networking é
+                                    muito importante. Faça parte da maior comunidade de
+                                    desenvolvedores brasileiros.
+                                </p>
 
-                    <HomeContentContainer__Right>
-                        <img src={DeveloperImg} alt="Developer" />
-                    </HomeContentContainer__Right>
+                                <button onClick={signInWithGitHub}>Entre agora</button>
+                            </HomeContentContainer__Left>
 
-                    <img src={BlobsImg} className="blobs" />
-                </HomeContentContainer>
-            </HomeContainer>
+                            <HomeContentContainer__Right>
+                                <img src={DeveloperImg} alt="Developer" />
+                            </HomeContentContainer__Right>
+
+                            <img src={BlobsImg} className="blobs" />
+                        </HomeContentContainer>
+                    </HomeContainer>
+                </>
+            )
+        }
         </>
     );
 }
