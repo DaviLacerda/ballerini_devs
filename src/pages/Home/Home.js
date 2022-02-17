@@ -8,7 +8,7 @@ import {
 import DeveloperImg from "../../assets/developer_home.svg";
 import BlobsImg from "../../assets/blobs.svg";
 import { app } from "../../firebaseConfig";
-import { GithubAuthProvider, getAuth, signInWithRedirect, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { Error } from "../Error/Error";
 
 export function Home() {

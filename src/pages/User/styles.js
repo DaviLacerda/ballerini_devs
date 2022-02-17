@@ -44,6 +44,27 @@ export const CardsDisplay = styled.div`
     }
 `
 
+export const DevInput = styled.input`
+    position:fixed;
+
+    width:200px;
+    height:40px;
+    padding:8px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+
+    @media(max-width:600px){
+        top:150px;
+        left:5vw;
+    }
+
+    @media(min-width:600px){
+        top:5vh;
+        right:5vw;
+    }
+`
+
 export const Card = styled.div`
     width:100%;
     max-width:400px;

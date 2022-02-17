@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { createClient } from "@supabase/supabase-js";
 import { Header } from "../../components/Header/Header";
-import { UserContainer, CardsDisplay, Card } from "./styles";
+import { UserContainer, CardsDisplay, Card, DevInput } from "./styles";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
@@ -14,6 +14,7 @@ import "swiper/css/navigation";
 
 export function User() {
     const [data, setData] = useState([])
+    const [search, setSearch] = useState('')
 
     const supabaseURL = process.env.REACT_APP_URL
     const supabaseApiKey = process.env.REACT_APP_API_KEY
@@ -33,6 +34,7 @@ export function User() {
     return (
         <>
             <Header />
+            <DevInput type="text" placeholder="Search developer" onInput={(e) => setSearch(e.target.value)}></DevInput>
             <UserContainer>
                 <CardsDisplay>
                     <Swiper
@@ -48,7 +50,14 @@ export function User() {
                         }}
                     >
                     {
-                        data.map((user) => {
+                        data.filter((user) => {
+                            if(search === ""){
+                                return user
+                            }
+                            else if(user.name.toLowerCase().includes(search)){
+                                return user
+                            }
+                        }).map((user) => {
                             return(
                                 <SwiperSlide key={user.id}>
                                     <Card>
