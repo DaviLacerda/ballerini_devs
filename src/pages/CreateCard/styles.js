@@ -23,6 +23,7 @@ export const CreateCardContainer = styled.div`
         border-radius:10px;
         border:none;
         outline:none;
+        z-index:9999;
     }
 
     button{
