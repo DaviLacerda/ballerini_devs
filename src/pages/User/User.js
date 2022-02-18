@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getAuth } from "firebase/auth";
 import { Header } from "../../components/Header/Header";
 import { UserContainer, CardsDisplay, Card, DevInput, LogOutButton } from "./styles";
 import GitHubIcon from '@mui/icons-material/GitHub';
