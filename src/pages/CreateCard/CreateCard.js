@@ -18,11 +18,9 @@ export function CreateCard(){
             img: `https://github.com/${gitHubUser}.png`
         }
 
-        supabase.from("user").insert([newUser]).then(({data}) => {
-            console.log(data);
+        supabase.from("user").insert([newUser]).then(({}) => {
+            window.location.href = `/user`
         })
-
-        window.location.href = `/user`
     }
 
     useEffect(() => {
