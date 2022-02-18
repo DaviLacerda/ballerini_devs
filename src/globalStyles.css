@@ -28,3 +28,7 @@ background: #1d1d1d;
 *::-webkit-scrollbar-thumb {
 background-color: #27AE60;
 }
+
+input{
+    user-select: initial;
+}

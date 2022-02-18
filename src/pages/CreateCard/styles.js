@@ -23,6 +23,7 @@ export const CreateCardContainer = styled.div`
         border-radius:10px;
         border:none;
         outline:none;
+        font-family:"Maven Pro",sans-serif;
         z-index:9999;
     }
 

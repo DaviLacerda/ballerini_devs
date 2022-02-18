@@ -24,7 +24,7 @@ export function User() {
     SwiperCore.use([Navigation])
 
     const logOut = async () => {
-        const { error } = await supabase.auth.signOut()
+        await supabase.auth.signOut()
         window.location.href = '/'
     }
 
@@ -43,14 +43,15 @@ export function User() {
                 <CardsDisplay>
                     <LogOutButton onClick={logOut}>LogOut</LogOutButton>
                     <Swiper
+                        spaceBetween={20}
                         slidesPerView={1}
+                        slidesPerGroup={1}
+                        centeredSlides={true}
                         navigation
-                        centeredSlides="true"
                         breakpoints={{
                             1200: {
                             slidesPerGroup: 1,
                             slidesPerView: 3,
-                            spaceBetween:75,
                             },
                         }}
                     >
@@ -68,7 +69,7 @@ export function User() {
                                     <Card>
                                         {user.img && <img src={user.img} alt={user.name || "Developer"} />}
                                         {user.name && <h2>{user.name}</h2>}
-                                        {user.about && <h3>{user.about}</h3>}
+                                        {user.about && <p>{user.about}</p>}
                                         <div className="icons">
                                             {
                                                 user.github && (
@@ -88,7 +89,6 @@ export function User() {
                                     </Card>
                                 </SwiperSlide>
                             )
-                            
                         })
                     }
                     </Swiper>

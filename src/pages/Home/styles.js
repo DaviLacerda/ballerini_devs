@@ -46,7 +46,7 @@ export const HomeContentContainer = styled.div`
     }
 `
 
-export const HomeContentContainer__Left = styled.div`
+export const HomeContentContainerLeft = styled.div`
     display:flex;
     flex-direction:column;
     gap:12px;
@@ -108,7 +108,7 @@ export const HomeContentContainer__Left = styled.div`
     }
 `
 
-export const HomeContentContainer__Right = styled.div`
+export const HomeContentContainerRight = styled.div`
     img{
         min-width:156px;
         min-height:156px;

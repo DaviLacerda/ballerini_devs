@@ -13,13 +13,11 @@ export const UserContainer = styled.div`
 export const CardsDisplay = styled.div`
     width:100%;
     height:80vh;
-
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:center;
     gap:30px;
-
     position:relative;
 
     .swiper{
@@ -36,7 +34,7 @@ export const CardsDisplay = styled.div`
         height:500px;
     }
 
-    .swiper-slide-active{
+    .swiper-slide{
         width:100%;
         max-width:400px;
         height:500px;
@@ -48,7 +46,6 @@ export const CardsDisplay = styled.div`
         color: #F9F9F980;
         border-radius:50%;
         border:3px solid #F9F9F980;
-
         &:after{
             font-size:1.2em;
             font-weight:bold;
@@ -130,6 +127,8 @@ export const Card = styled.div`
     justify-content:center;
     flex-direction:column;
     gap:8px;
+    padding:16px;
+    margin:0;
 
     background-color:#F9F9F924;
     box-shadow: -1px 7px 25px 1px rgba(0,0,0,0.65);
@@ -156,6 +155,10 @@ export const Card = styled.div`
     h2{
         padding-top:20px;
         border-top:3px solid #27AE60;
+    }
+
+    p{
+        font-family:"Overpass",sans-serif;
     }
 
     .icons{
