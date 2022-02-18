@@ -13,9 +13,9 @@ export function Header(){
     return (
         <StyledHeader>
             <FlexRow icons>
-                <a href={linkedinLink} target="_blank"><img src={linkedin} alt="Linkedin" /></a>
-                <a href={facebookLink} target="_blank"><img src={facebook} alt="Facebook" /></a>
-                <a href={discordLink} target="_blank"><img src={discord} alt="Discord" /></a>
+                <a href={linkedinLink} target="_blank" rel="noreferrer"><img src={linkedin} alt="Linkedin" /></a>
+                <a href={facebookLink} target="_blank" rel="noreferrer"><img src={facebook} alt="Facebook" /></a>
+                <a href={discordLink} target="_blank" rel="noreferrer"><img src={discord} alt="Discord" /></a>
             </FlexRow>
             <a href="/">
                 <FlexRow logo>

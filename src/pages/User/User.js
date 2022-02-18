@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Header } from "../../components/Header/Header";
 import { UserContainer, CardsDisplay, Card, DevInput, LogOutButton } from "./styles";
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -7,10 +7,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { supabase } from "../../hooks/supabase";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 
 import "swiper/css";
 import "swiper/css/navigation";
+
+import gsap from "gsap";
 
 export function User() {
     const [data, setData] = useState([])
@@ -28,9 +30,25 @@ export function User() {
         window.location.href = '/'
     }
 
+    const content = useRef()
+
     useEffect(() => {
         requestDatabase()
     }, [data])
+
+    useEffect(() => {
+        gsap.from(content.current, {
+            y:100,
+            opacity:0,
+            duration:1
+        });
+        gsap.to(content.current, {
+            y:0,
+            opacity:1,
+            duration:1
+        });
+    }, [])
+    
 
     return (
         <>
@@ -39,7 +57,7 @@ export function User() {
                 <SearchIcon />
                 <input type="text" placeholder="Buscar Desenvolvedor" onInput={(e) => setSearch(e.target.value)}></input>
             </DevInput>
-            <UserContainer>
+            <UserContainer ref={content}>
                 <CardsDisplay>
                     <LogOutButton onClick={logOut}>LogOut</LogOutButton>
                     <Swiper
@@ -73,14 +91,14 @@ export function User() {
                                         <div className="icons">
                                             {
                                                 user.github && (
-                                                    <a href={user.github} target="_blank">
+                                                    <a href={user.github} target="_blank" rel="noreferrer">
                                                         <GitHubIcon />
                                                     </a>
                                                 )
                                             }
                                             {
                                                 user.linkedin && (
-                                                    <a href={user.linkedin} target="_blank">
+                                                    <a href={user.linkedin} target="_blank" rel="noreferrer">
                                                         <LinkedInIcon />
                                                     </a>
                                                 )
